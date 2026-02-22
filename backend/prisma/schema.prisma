@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model Admin {
+  id Int @id @default(autoincrement())
+  username String @unique
+  password String
+  createdAt DateTime @default(now())
+}
+
+model SchoolYear {
+  id Int @id @default(autoincrement())
+  name String
+  isActive Boolean @default(false)
+  payments Payment[]
+}
+
+model Department {
+  id Int @id @default(autoincrement())
+  name String @unique
+  payments Payment[]
+}
+
+model Level {
+  id Int @id @default(autoincrement())
+  name String
+  payments Payment[]
+}
+
+model Payment {
+  id Int @id @default(autoincrement())
+  name String
+  matricule String
+  amount Float
+  internalRef String @unique
+  status PaymentStatus @default(PENDING)
+  providerTransactionId String? @unique
+  createdAt DateTime @default(now())
+
+  departmentId Int
+  levelId Int
+  schoolYearId Int
+
+  department Department @relation(fields: [departmentId], references: [id])
+  level       Level      @relation(fields: [levelId], references: [id])
+  schoolYear  SchoolYear @relation(fields: [schoolYearId], references: [id])
+
+  @@unique([matricule, schoolYearId])
+}

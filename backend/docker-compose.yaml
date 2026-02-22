@@ -1,0 +1,33 @@
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_USER: user123
+      POSTGRES_DB: mydb123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-node-app
+    ports:
+      - "13000:3000"
+    depends_on:
+      - db
+# ...existing code...
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+volumes:
+  pgdata:
