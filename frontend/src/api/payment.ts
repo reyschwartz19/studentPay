@@ -10,14 +10,14 @@ export interface PaymentResponse {
     status: "PENDING" | "COMPLETED" | "FAILED";
     internalRef: string;
     createdAt: string;
-  };
+  }[];
 }
 
 export const createPayment = async (payload: {
     name: string;
     matricule: string;
-    departmentId: string;
-    levelId: string;
+    departmentId: number;
+    levelId: number;
     amount: number;
 }): Promise<PaymentResponse> => {
     return fetcher<PaymentResponse>("/payments",{
