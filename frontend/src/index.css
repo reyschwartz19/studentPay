@@ -1,8 +1,10 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
 @theme {
   --color-primary: #0c2b4a;
   --color-secondary: #f3be00;
+  --font-primary: "Inter", sans-serif;
 }
 
 @layer utilities{
