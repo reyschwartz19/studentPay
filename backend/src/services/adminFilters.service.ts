@@ -1,9 +1,21 @@
 import { PaymentStatus } from "@prisma/client";
 import prisma from "../config/prisma";
 
+export interface AdminFiltersDTO {
+    id: number;
+    name: string;
+    matricule: string;
+    amount: number;
+    status: PaymentStatus;
+    internalRef: string;
+    createdAt: Date;
+}
+
 
 export const getAllPayments = async () =>{
-    const payments = await prisma.payment.findMany()
+    const payments = await prisma.payment.findMany({
+        orderBy: {createdAt: "desc"}
+    })
     return payments;
 }
 
