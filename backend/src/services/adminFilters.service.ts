@@ -55,17 +55,7 @@ export const getAllPayments = async () =>{
 //     return payments;
 // }
 
-export const updatePaymentStatus = async (id: number, status: PaymentStatus) => {
-    const payment = await prisma.payment.update({
-        where: {
-            id: id,
-        },
-        data: {
-            status: status,
-        }
-    })
-    return payment;
-}
+
 
 export const getFilteredPayments = async(
     {

@@ -6,6 +6,7 @@ import paymentRouter from "./routes/payment.route";
 import authRouter from "./routes/auth.route";
 import ReferenceRouter from "./routes/references.route";
 import filterRouter from "./routes/adminFilters.route";
+import settingsRouter from "./routes/adminSettings.route";
 
 const port = 3001;
 
@@ -24,6 +25,7 @@ app.use("/api/payments", paymentRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/references", ReferenceRouter);
 app.use("/api/admin", filterRouter);
+app.use("/api/admin", settingsRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

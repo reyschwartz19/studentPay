@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { updatePaymentStatus, getFilteredPayments, getAllPayments, AdminFiltersDTO  } from "../services/adminFilters.service";
+import { getFilteredPayments, getAllPayments, AdminFiltersDTO  } from "../services/adminFilters.service";
 import { PaymentStatus } from "@prisma/client/edge";
 
 export const getAllPaymentsController = async (req: Request, res: Response) => {
@@ -23,20 +23,7 @@ export const getAllPaymentsController = async (req: Request, res: Response) => {
     }
 };
 
-export const updatePaymentStatusController = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { status } = req.body;
 
-    try {
-        const updatedPayment = await updatePaymentStatus(Number(id), status);
-        res.status(200).json({
-            success: true,
-            data: updatedPayment
-        });
-    } catch (error) {
-        res.status(500).json({ error: "Failed to update payment status" });
-    }
-};
 
 export const getFilteredPaymentsController = async (req: Request, res: Response) => {
     
