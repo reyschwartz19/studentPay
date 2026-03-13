@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import { createPayment, PaymentResponseDto } from "../services/payment.service";
+import { Request, Response } from "express";
+import { createPayment, PaymentResponseDto, updatePaymentProviderTransactionId } from "../services/payment.service";
 import { createStripePaymentIntent } from "../services/createStripePaymentIntent.service";
+
 
 export const createPaymentController = async(
     req: Request,
@@ -8,7 +9,13 @@ export const createPaymentController = async(
 
     try{
         const payment = await createPayment(req.body);
-        
+        const paymentIntent = await createStripePaymentIntent({
+            amount: payment.amount,
+            internalRef: payment.internalRef
+        })
+
+        await updatePaymentProviderTransactionId(payment.id, paymentIntent.id);
+
         const response: PaymentResponseDto = {
             id: payment.id,
             name: payment.name,

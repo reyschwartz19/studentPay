@@ -86,3 +86,27 @@ export async function createPayment(input: CreatePaymentInput) {
     }
 }
 
+export const updatePaymentProviderTransactionId =  async (paymentId: number, transactionId: string) => {
+    return prisma.payment.update({
+        where: {id: paymentId},
+        data: {
+            providerTransactionId: transactionId
+        }
+    })
+}
+
+export const updatePaymentStatus = async (
+    internalRef: string,
+    status: "COMPLETED" | "FAILED"
+) => {
+    const payment = await prisma.payment.findUnique({
+        where: {internalRef}
+    });
+    if(!payment){
+        throw new Error(`Payment with internalRef ${internalRef} not found`);
+    }
+    return prisma.payment.update({
+        where: {internalRef},
+        data: {status}
+    })
+}
