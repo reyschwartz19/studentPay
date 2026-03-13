@@ -95,7 +95,7 @@ export const updatePaymentProviderTransactionId =  async (paymentId: number, tra
     })
 }
 
-export const updatePaymentStatus = async (
+export const updatePaymentStatusByInternalRef = async (
     internalRef: string,
     status: "COMPLETED" | "FAILED"
 ) => {

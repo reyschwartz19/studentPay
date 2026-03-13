@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.route";
 import ReferenceRouter from "./routes/references.route";
 import filterRouter from "./routes/adminFilters.route";
 import settingsRouter from "./routes/adminSettings.route";
+import WebhookRouter from "./routes/webhook.route";
 
 const port = 3001;
 
@@ -18,6 +19,8 @@ app.use(cors(
         credentials: true
     }
 ));
+
+app.use("/webhooks", WebhookRouter)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,6 +29,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/references", ReferenceRouter);
 app.use("/api/admin", filterRouter);
 app.use("/api/admin", settingsRouter);
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
