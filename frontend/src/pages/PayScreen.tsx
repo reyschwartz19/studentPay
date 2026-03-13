@@ -145,6 +145,7 @@ const PayScreen = () => {
                 </div>
                 <button 
                 type="submit" 
+                
                 className='py-3 px-6 bg-primary text-white rounded-md font-bold cursor-pointer mt-4'
                 onClick={handleSubmit}>
                     Pay Now</button>

@@ -85,3 +85,4 @@ export async function createPayment(input: CreatePaymentInput) {
         return `PAY-${timestampPart}-${randoPart}`;
     }
 }
+

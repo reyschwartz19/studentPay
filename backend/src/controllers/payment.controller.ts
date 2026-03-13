@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { createPayment, PaymentResponseDto } from "../services/payment.service";
+import { createStripePaymentIntent } from "../services/createStripePaymentIntent.service";
 
 export const createPaymentController = async(
     req: Request,
@@ -7,6 +8,7 @@ export const createPaymentController = async(
 
     try{
         const payment = await createPayment(req.body);
+        
         const response: PaymentResponseDto = {
             id: payment.id,
             name: payment.name,
