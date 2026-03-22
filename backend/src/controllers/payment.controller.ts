@@ -23,7 +23,8 @@ export const createPaymentController = async(
             amount: payment.amount,
             status: payment.status,
             internalRef: payment.internalRef,
-            createdAt: payment.createdAt
+            createdAt: payment.createdAt,
+            clientSecret: paymentIntent.client_secret || ""
         }
         res.status(201).json({success: true, data: response});
     }catch(error: unknown){

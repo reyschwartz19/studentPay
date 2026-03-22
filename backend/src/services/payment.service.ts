@@ -18,6 +18,7 @@ export interface PaymentResponseDto {
   status: "PENDING" | "COMPLETED" | "FAILED";
   internalRef: string;
   createdAt: Date;
+  clientSecret: string;
 }
 
 export async function createPayment(input: CreatePaymentInput) {
