@@ -10,7 +10,8 @@ export interface PaymentResponse {
     status: "PENDING" | "COMPLETED" | "FAILED";
     internalRef: string;
     createdAt: string;
-  }[];
+    clientSecret: string;
+  };
 }
 
 export const createPayment = async (payload: {
