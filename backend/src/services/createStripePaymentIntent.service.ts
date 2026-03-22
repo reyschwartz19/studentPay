@@ -25,11 +25,7 @@ export const createStripePaymentIntent = async ({
         const paymentIntent = await stripe.paymentIntents.create({
            amount,
            currency: "xaf",
-            automatic_payment_methods: {
-               enabled: true,
-               allow_redirects: "never"
-              },
-
+           
            metadata: {
             internalRef
            }
