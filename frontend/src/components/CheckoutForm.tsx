@@ -19,7 +19,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Stripe.js hasn't loaded yet
         if (!stripe || !elements) {
             return;
         }
@@ -27,23 +26,23 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
         setIsProcessing(true);
 
         try {
-            // Confirm the payment with Stripe
+            
             const { error, paymentIntent } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: `${window.location.origin}/payment-success`, // Fallback URL
+                    return_url: `${window.location.origin}/payment-success`, 
                 },
-                redirect: 'if_required', // Stay on page if possible
+                redirect: 'if_required', 
             });
 
             if (error) {
-                // Payment failed
+                
                 onError(error.message || 'Payment failed');
             } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-                // Payment succeeded
+                
                 onSuccess();
             }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        
         } catch (err) {
             onError('An unexpected error occurred');
         } finally {
@@ -58,7 +57,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 <p className="text-2xl font-bold text-primary">{amount} XAF</p>
             </div>
             
-            {/* Stripe's payment form (credit card fields) */}
+          
             <PaymentElement />
             
             <button

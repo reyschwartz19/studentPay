@@ -20,7 +20,7 @@ app.use(cors(
     }
 ));
 
-app.use("/webhooks", WebhookRouter)
+app.use("/api/webhooks", WebhookRouter)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

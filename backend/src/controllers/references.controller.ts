@@ -39,8 +39,10 @@ export const getLevelsController = async (req: Request, res: Response) => {
     }catch(error: unknown){
         if(error instanceof Error){
             res.status(400).json({success: false, message: error.message});
+            return;
         } else {
             res.status(500).json({success: false, message: "An unexpected error occurred"});
+            return;
         }
     }
 }
