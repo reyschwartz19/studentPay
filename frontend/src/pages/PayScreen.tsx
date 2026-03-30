@@ -2,15 +2,13 @@ import logo from '../assets/images.jfif';
 import { ArrowDown, CreditCard } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import {  stripePromise } from '../lib/stripe';
 import { fetchDepartments, fetchLevels, fetchMinimumAmount } from '../api/references';
 import { createPayment } from '../api/payment';
 import { CheckoutForm } from '../components/CheckoutForm';
 
-
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-
 const PayScreen = () => {
+    
     // Form state
     const [departments, setDepartments] = useState<{id: number, name: string}[]>([]);
     const [levels, setLevels] = useState<{id: number, name: string}[]>([]);
@@ -251,7 +249,7 @@ const PayScreen = () => {
                                     appearance: {
                                         theme: 'stripe',
                                         variables: {
-                                            colorPrimary: '#your-primary-color',
+                                            colorPrimary: '#000000',
                                         }
                                     }
                                 }}

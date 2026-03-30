@@ -5,7 +5,7 @@ const WebhookRouter = express.Router();
 
 WebhookRouter.post(
   "/stripe",
-  express.raw({ type: "application/json" }),
+  express.raw({ type: "*/*" }),
   stripeWebhookController
 );
 

@@ -44,7 +44,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             }
         
         } catch (err) {
-            onError('An unexpected error occurred');
+            onError('An unexpected error occurred',err);
         } finally {
             setIsProcessing(false);
         }

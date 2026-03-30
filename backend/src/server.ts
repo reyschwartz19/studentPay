@@ -7,7 +7,7 @@ import authRouter from "./routes/auth.route";
 import ReferenceRouter from "./routes/references.route";
 import filterRouter from "./routes/adminFilters.route";
 import settingsRouter from "./routes/adminSettings.route";
-import WebhookRouter from "./routes/webhook.route";
+import { stripeWebhookController } from "./controllers/stripeWebHook.controller";
 
 const port = 3001;
 
@@ -20,7 +20,11 @@ app.use(cors(
     }
 ));
 
-app.use("/api/webhooks", WebhookRouter)
+app.post(
+  "/api/webhooks/stripe",
+  express.raw({ type: "application/json" }),
+  stripeWebhookController
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
